@@ -24,7 +24,7 @@ sudo dnf install sdl-hercules
 
 Package name and version varies depending on which operating system you are using. If you are on Windows, you'll need to find the installer - start from the [GitHub repo](https://github.com/SDL-Hercules-390/hyperion).
 
-Then you'll need to set up the VM370 environment. The website at [vm370.org]https://vm370.org/vm370/) details the process.
+Then you'll need to set up the VM370 environment. The website at [vm370.org](https://vm370.org/vm370/) details the process.
 
 With that taken out of our way, we can start to have fun.
 
