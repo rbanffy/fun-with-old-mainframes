@@ -154,7 +154,9 @@ DIR * MODULE S
 
 It's no fun to log in as CMSUSER every time you want to do something. You'll want a user for yourself, with reasonable permissions to do things to the machine. In my case, I want to create an "RBANFFY" user for me.
 
-Here's the first shock for those who come from other platforms - you won't create a user, you'd create a VM, and you log in to that VM.
+Here's the first shock for those who come from other platforms - you wouldn't create a user, you'd create a VM, and you log in to that VM.
+
+![One does not simply add a user to TSO](one-does-not-simply-add-a-user.jpg)
 
 Creating a VM is a bit involved - you'll need to do a lot of things before - allocate and format storage, for instance. We'll leave that for later.
 
