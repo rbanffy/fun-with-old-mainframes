@@ -28,11 +28,41 @@ Then you'll need to set up the VM370 environment. The website at [vm370.org](htt
 
 With that taken out of our way, we can start to have fun.
 
-### Adding a user for you
+### Logging on
 
-It's no fun to log in as CMSUSER every time you want to do something. You'll want a user for yourself, with reasonable permissions to do things to the machine. In my case, I want to create an "RBANFFY" user for me.
+For normal things, we'll log on to the CMSUSER VM, or, if you renamed it, to your own VM. The default password is "CMSUSER":
 
-TBA
+On the banner screen, press ENTER.
+
+![VM/370 CE](vm370ce-banner.png)
+
+The screen will clear. You can then enter `logon cmsuser`:
+
+![logon cmsuser](logon-cmsuser.png)
+
+And enter the password, "cmsuser":
+
+![enter password](enter-password.png)
+
+As expected, the password isn't shown. The red cursor means that.
+
+![logged on](logged-on.png)
+
+At this point, you are logged on. When you press ENTER another time, a program, called "PROFILE EXEC" will be run:
+
+![profile-exec](profile-exec.png)
+
+We can examine it. Note that "PROFILE EXEC" means the name is "PROFILE" and the type is "EXEC". To show the contents of the file, use:
+
+```text
+type profile exec
+```
+
+![type profile exec](type-profile-exec.png)
+
+I am not sure whether PC-DOS copied the "dir" and "type" command from CP/M or from CMS (or CP), but this is they do more or less the same as you would expect on the smaller computers.
+
+As for the PROFILE program, we'll look at it later.
 
 ### Running a BASIC program
 
@@ -84,10 +114,20 @@ VM/370 CE comes with a couple hello world programs. You can use the "dir" comman
 type hello fortran
 ```
 
-I am not sure whether PC-DOS copied the "dir" and "type" command from CP/M or from CMS (or CP), but this is they do more or less the same as you would expect on the smaller computers.
-
 ![dir and type](dir-and-type-hello-fortran.png)
 
 #### Let's compile that FORTRAN program (so we can run it)
 
 [TBA]
+
+### Adding a user for you
+
+It's no fun to log in as CMSUSER every time you want to do something. You'll want a user for yourself, with reasonable permissions to do things to the machine. In my case, I want to create an "RBANFFY" user for me.
+
+Here's the first shock for those who come from other platforms - you won't create a user, you'd create a VM, and you log in to that VM.
+
+Creating a VM is a bit involved - you'll need to do a lot of things before - allocate and format storage, for instance. We'll leave that for later.
+
+In the meantime, if you want to rename the CMSUSER VM to your preferred name (and changing the password), we can explain that For that, we'll start logging on as MAINT (which means, logging on to the MAINT VM).
+
+
