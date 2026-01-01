@@ -136,7 +136,7 @@ he third parameter is the disk:
 
 ![list * * a](list-star-star-a.png)
 
-So... Looking at the output of `LIST` and `LIST * * A`, we can conclude we were start from disk A. In this case, A is a shortcut to disk 191 (mainframes always were supposed to have lots of disks, and our emulated one - a tricked out 4381 - has more than most companies could afford, or that would fit in most period accurate computer rooms).
+So... Looking at the output of `LIST` and `LIST * * A`, we can conclude we were start from disk A. In this case, A is a shortcut to disk 191 (mainframes always were supposed to have lots of disks, and our emulated one - a tricked out 4381 - has more than most companies could afford, or that would fit in most period accurate computer rooms). In our case, 191 is the "address" of the disk, and tells where the disk is connected to the computer. Disks also have 6-character labels (or "VOLSER" in mainframe slang). A is "CMS190".
 
 Let's check the other disks:
 
@@ -144,11 +144,15 @@ Let's check the other disks:
 
 Disks D, E, F, and G are empty. That wouldn't be a surprise if we had paid attention to the output of `QUERY DISK` - it clearly says they have zero files, and use 5 blocks (rounded to 0% of the disk).
 
-There is also disk S. It has 172 files, so it'll take a couple pages to list everything. In the list you'll see a lot of interesting files - this disk contains system utilities - there's ACCESS, EDIT, QUERY, SET, SORT, GLOBAL, and other things that we have seen before or that look like things an OS would provide. Binary programs seem to be of type "MODULE". Let's remember that. Try listing all files of type MODULE in S:
+There is also disk S (or 190, or ). It has 172 files, so it'll take a couple pages to list everything. In the list you'll see a lot of interesting files - this disk contains system utilities - there's ACCESS, EDIT, QUERY, SET, SORT, GLOBAL, and other things that we have seen before or that look like things an OS would provide (not a big surprise, as its label is "CMSDSK"). Binary programs seem to be of type "MODULE". Let's remember that. Try listing all files of type MODULE in S:
 
 ```text
 DIR * MODULE S
 ```
+
+[Other disks TBA]
+
+![dir * module s](dir-star-module-s.png)
 
 ### Adding a user for you
 
