@@ -52,7 +52,7 @@ At this point, you are logged on. When you press ENTER another time, a program, 
 
 ![profile-exec](profile-exec.png)
 
-We can examine it. Note that "PROFILE EXEC" means the name is "PROFILE" and the type is "EXEC". To show the contents of the file, use:
+We can examine it. Note that "PROFILE EXEC" means the name is "PROFILE" and the type is "EXEC" (a script). To show the contents of the file, use:
 
 ```text
 type profile exec
@@ -119,6 +119,36 @@ type hello fortran
 #### Let's compile that FORTRAN program (so we can run it)
 
 [TBA]
+
+### Navigating the disks
+
+The VM370CE distribution has a lot of disks. You can check which ones you have immediate access with. If you logged on as CMSUSER, you can use the LIST command to see what files are on your default disk. Unix users might remember `ls` is short for "list". The output of `LIST` is terser than the one for `DIR`, probably another coincidence (DIR on CP/M and MS-DOS shows more than just file names)
+
+![list](list.png)
+
+To check the disks you have, use `QUERY DISK`:
+
+![query disk](query-disk.png)
+
+To list what's on a disk, you'll use `LIST * * [disk]`. The first "*" is a wildcard that will show all file names, the second is for all types. If you are familiar with windcards from CP/M, MS-DOS, or Unix, these don't behave the same.
+
+he third parameter is the disk:
+
+![list * * a](list-star-star-a.png)
+
+So... Looking at the output of `LIST` and `LIST * * A`, we can conclude we were start from disk A. In this case, A is a shortcut to disk 191 (mainframes always were supposed to have lots of disks, and our emulated one - a tricked out 4381 - has more than most companies could afford, or that would fit in most period accurate computer rooms).
+
+Let's check the other disks:
+
+![D, E, F, and G are empty](d-e-f-g-empty.png)
+
+Disks D, E, F, and G are empty. That wouldn't be a surprise if we had paid attention to the output of `QUERY DISK` - it clearly says they have zero files, and use 5 blocks (rounded to 0% of the disk).
+
+There is also disk S. It has 172 files, so it'll take a couple pages to list everything. In the list you'll see a lot of interesting files - this disk contains system utilities - there's ACCESS, EDIT, QUERY, SET, SORT, GLOBAL, and other things that we have seen before or that look like things an OS would provide. Binary programs seem to be of type "MODULE". Let's remember that. Try listing all files of type MODULE in S:
+
+```text
+DIR * MODULE S
+```
 
 ### Adding a user for you
 
