@@ -160,9 +160,15 @@ The easiest way to do it, is with the x3270 app - on the File menu select "File 
 
 ![File Transfer Dialog](file-transfer-dialog.png)
 
-Since we are uploading a VMARC file (think a .zip or .tar.bz2), we'll chose a binary transfer. The file will be saved to our disk D. And it'll be a while (if my powerful Raspberry Pi Zero W running a docker container is any indication).
+Since we are uploading a VMARC file (think a .zip or .tar.bz2), we'll chose a binary transfer. The file will be saved to our disk D. It might be a while if you are running Hercules on an underpowered Raspberry Pi Zero W. I assume a local instance on a sensible computer will be a lot faster.
 
 ![Transfer is happening](ongoing-transfer.png)
+
+Now we need to understand how to open a VMARC file. Luckily for us, VM370CE has a very comprehensive help system. On the terminal, issue a:
+
+```text
+HELP VMARC
+```
 
 ### Adding a user for you
 
