@@ -122,11 +122,11 @@ type hello fortran
 
 ### Navigating the disks
 
-The VM370CE distribution has a lot of disks. You can check which ones you have immediate access with. If you logged on as CMSUSER, you can use the LIST command to see what files are on your default disk. Unix users might remember `ls` is short for "list". The output of `LIST` is terser than the one for `DIR`, probably another coincidence (DIR on CP/M and MS-DOS shows more than just file names)
+The VM370CE distribution has a lot of disks. You can check which ones you have immediate access with. If you logged on as CMSUSER, you can use the LISTFILE (we abreviated it to "LIST") command to see what files are on your default disk. In CMS, commands can be abbreviated - the actual command is `LISTFILE` but `LIST` is neat enough.
 
 ![list](list.png)
 
-To check the disks you have, use `QUERY DISK`:
+To check the disks you have, use `QUERY DISK` (query can also be abbreviated - `Q` will suffice for the computer to understand what you want):
 
 ![query disk](query-disk.png)
 
@@ -150,9 +150,19 @@ There is also disk S (or 190, or ). It has 172 files, so it'll take a couple pag
 DIR * MODULE S
 ```
 
+![dir * module s](dir-star-module-s.png)
+
 [Other disks TBA]
 
-![dir * module s](dir-star-module-s.png)
+### Uploading files to your machine
+
+The easiest way to do it, is with the x3270 app - on the File menu select "File Transfer":
+
+![File Transfer Dialog](file-transfer-dialog.png)
+
+Since we are uploading a VMARC file (think a .zip or .tar.bz2), we'll chose a binary transfer. The file will be saved to our disk D. And it'll be a while (if my powerful Raspberry Pi Zero W running a docker container is any indication).
+
+![Transfer is happening](ongoing-transfer.png)
 
 ### Adding a user for you
 
