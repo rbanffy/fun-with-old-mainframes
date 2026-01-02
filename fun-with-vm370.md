@@ -176,4 +176,6 @@ Creating a VM is a bit involved - you'll need to do a lot of things before - all
 
 In the meantime, if you want to rename the CMSUSER VM to your preferred name (and changing the password), we can explain that For that, we'll start logging on as MAINT (which means, logging on to the MAINT VM).
 
+#### Editing USER DIRECT
 
+#### Updating the directory
