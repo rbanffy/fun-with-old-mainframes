@@ -60,7 +60,7 @@ type profile exec
 
 ![type profile exec](type-profile-exec.png)
 
-I am not sure whether PC-DOS copied the "dir" and "type" command from CP/M or from CMS (or CP), but this is they do more or less the same as you would expect on the smaller computers.
+I am not sure whether PC-DOS copied the "dir" and "type" command from CP/M or from CMS (or CP), but they do more or less the same as you would expect on the smaller computers.
 
 As for the PROFILE program, we'll look at it later.
 
@@ -136,7 +136,7 @@ he third parameter is the disk:
 
 ![list * * a](list-star-star-a.png)
 
-So... Looking at the output of `LIST` and `LIST * * A`, we can conclude we were start from disk A. In this case, A is a shortcut to disk 191 (mainframes always were supposed to have lots of disks, and our emulated one - a tricked out 4381 - has more than most companies could afford, or that would fit in most period accurate computer rooms). In our case, 191 is the "address" of the disk, and tells where the disk is connected to the computer. Disks also have 6-character labels (or "VOLSER" in mainframe slang). A is "CMS190".
+So... Looking at the output of `LIST` and `LIST * * A`, we can conclude we were start from disk A. In this case, A is a shortcut to disk 191 (mainframes always were supposed to have lots of disks, and our emulated one - a tricked out 4381 - has more than most companies could afford, or that would fit in most period accurate computer rooms). In our case, 191 is the "address" of the disk, and tells where the disk is connected to the virtual machine. Disks also have 6-character labels (or "VOLSER" in mainframe slang). A is "CMS190".
 
 Let's check the other disks:
 
