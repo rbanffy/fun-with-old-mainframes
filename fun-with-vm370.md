@@ -156,19 +156,55 @@ DIR * MODULE S
 
 ### Uploading files to your machine
 
-The easiest way to do it, is with the x3270 app - on the File menu select "File Transfer":
+For this example, we'll use the `GAMES.VMARC` file available at the [h390-vm group at groups.io](https://groups.io/g/h390-vm). The easiest way to upload a file to your mainframe is with the x3270 app - on the File menu select "File Transfer":
 
 ![File Transfer Dialog](file-transfer-dialog.png)
 
-Since we are uploading a VMARC file (think a .zip or .tar.bz2), we'll chose a binary transfer. The file will be saved to our disk D. It might be a while if you are running Hercules on an underpowered Raspberry Pi Zero W. I assume a local instance on a sensible computer will be a lot faster.
+Since we are uploading a VMARC file (think a .zip or .tar.bz2), we'll chose a binary transfer. The file will be saved to our disk D. 
 
 ![Transfer is happening](ongoing-transfer.png)
+
+It might be a while if you are running Hercules on an underpowered Raspberry Pi Zero W. I assume a local instance on a sensible computer will be a lot faster. When the transfer is finished, a new dialog will pop up telling you so.
+
+![Transfer complete](transfer-complete.png)
 
 Now we need to understand how to open a VMARC file. Luckily for us, VM370CE has a very comprehensive help system. On the terminal, issue a:
 
 ```text
 HELP VMARC
 ```
+
+![VMARC Help](help-vmarc.png)
+
+Listing the contents of the file seems like a good first step:
+
+```text
+VMARC LIST GAMES VMARC D
+```
+
+![List archive contents](vmarc-list-games-vmarc-d.png)
+
+Let's get one of the games:
+
+```text
+vmarc unpack games vmarc d tictoe module d
+```
+
+It's there!
+
+![Extracting one file](vmarc-unpack-games-vmarc-d-tictoe-module-d.png)
+
+Now we want to run it.
+
+```text
+tictoe
+```
+
+... and it works!
+
+![tictoe](tictoe.png)
+
+As most people know, the only winning move with Tic Tac Toe is not to play. The other games are a lot more interesting.
 
 ### Adding a user for you
 
@@ -185,3 +221,5 @@ In the meantime, if you want to rename the CMSUSER VM to your preferred name (an
 #### Editing USER DIRECT
 
 #### Updating the directory
+
+&copy; 2025 Ricardo Bánffy
