@@ -154,7 +154,7 @@ DIR * MODULE S
 
 [Other disks TBA]
 
-### Uploading files to your machine
+### Uploading files to your machine (and playing games)
 
 For this example, we'll use the `GAMES.VMARC` file available at the [h390-vm group at groups.io](https://groups.io/g/h390-vm). The easiest way to upload a file to your mainframe is with the x3270 app - on the File menu select "File Transfer":
 
@@ -205,6 +205,24 @@ tictoe
 ![tictoe](tictoe.png)
 
 As most people know, the only winning move with Tic Tac Toe is not to play. The other games are a lot more interesting.
+
+### Moar games
+
+Other two game archives that are easy to obtain are under the [VM-370-Games](https://github.com/marXtevens/VM-370-Games) repo on Github. Once you download the files to your desktop and sent them to your VMS machine, you'll have:
+
+```text
+Filename Filetype Fm  Format    Recs Blocks    Date     Time   Label
+VM86F155 VMARC    D1  V    80  15578   1597  01/03/26    1:20  CMS192
+ZORK     VMARC    D1  V    80   8865    909  01/03/26    0:37  CMS192
+```
+
+The first one, `VM86F155`, has a lot of games in BASIC you can explore and modify (it you figure out how `EDIT` works).
+
+The ZORK code is in FORTRAN, and, while there is a program called GENZORK, it fails (maybe it needs to run on a disk at B).
+
+![GENZORK ABEND'ing](zork-fail.png)
+
+Let me know if you figure it out.
 
 ### Adding a user for you
 
