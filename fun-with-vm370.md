@@ -4,6 +4,8 @@
 
 This page assumes you have a machine (emulated or not) running the VM370 Community Edition OS available. There are a couple ways to get one, and you might want to choose the one that appeals to you the most (or the one that's less work - it's up to you).
 
+> **Note:** This is still very incomplete - I am accepting suggestions of other fun things to do.
+
 ### With Docker
 
 This assumes you have Docker installed. If you do, you can just issue a shell command to have your own machine.
@@ -238,6 +240,14 @@ In the meantime, if you want to rename the CMSUSER VM to your preferred name (an
 
 #### Editing USER DIRECT
 
-#### Updating the directory
+#### Updating the USER directory
 
-&copy; 2025 Ricardo Bánffy
+### Talking to other mainframes
+
+#### Mounting a disk on another running Hercules instance
+
+#### TCP/IP networking on VM370
+
+(is this even possible?)
+
+&copy; 2025-2026 Ricardo Bánffy
