@@ -48,6 +48,8 @@ And enter the password, "cmsuser":
 
 As expected, the password isn't shown. The red cursor means that.
 
+You can also logon using `LOGON CMSUSER CMSUSER`, typing the password after the user name, but that horrifies me even more than having the username as the password. Back when VM/370 was invented, intrusions were a lot less of a problem than they are now. Please do not expose your VM/370 mainframe directly on the internet.
+
 ![logged on](logged-on.png)
 
 At this point, you are logged on. When you press ENTER another time, a program, called "PROFILE EXEC" will be run:
@@ -57,7 +59,7 @@ At this point, you are logged on. When you press ENTER another time, a program, 
 We can examine it. Note that "PROFILE EXEC" means the name is "PROFILE" and the type is "EXEC" (a script). To show the contents of the file, use:
 
 ```text
-type profile exec
+TYPE PROFILE EXEC
 ```
 
 ![type profile exec](type-profile-exec.png)
@@ -75,7 +77,7 @@ Let's start with the lamest, most basic BASIC program: a Hello World.
 On your terminal, type:
 
 ```text
-edit hello basic
+EDIT HELLO BASIC
 ```
 
 Note that "basic" is not a suffix, but a type - it's a separate parameter. The type of the file is a property of the file and will remain with it unless forcibly changed.
@@ -101,7 +103,7 @@ The line at the bottom shows a "MORE..." note. This means the terminal is waitin
 Now we can run our program:
 
 ```text
-basic hello
+BASIC HELLO
 ```
 
 You'll see your command ("basic hello") show up at the top of the screen (after the message indicating EDIT finished), then the message you ordered it to print "HELLO WORLD", followed by another line telling how much CPU it used and how long did it take to run your program.
@@ -110,10 +112,10 @@ You'll see your command ("basic hello") show up at the top of the screen (after 
 
 ### A bit of FORTRAN
 
-VM/370 CE comes with a couple hello world programs. You can use the "dir" command to list what files are in the disk you are seeing. We typed our own in BASIC, but there is one in C and one in FORTRAN. Let's see the FORTRAN one:
+VM/370 CE comes with a couple hello world programs. You can use the `DIR` command to list what files are in the disk you are seeing. We typed our own in BASIC, but there is one in C and one in FORTRAN. Let's see the FORTRAN one:
 
 ```text
-type hello fortran
+TYPE HELLO FORTRAN
 ```
 
 ![dir and type](dir-and-type-hello-fortran.png)
@@ -132,13 +134,13 @@ To check the disks you have, use `QUERY DISK` (query can also be abbreviated - `
 
 ![query disk](query-disk.png)
 
-To list what's on a disk, you'll use `LIST * * [disk]`. The first "*" is a wildcard that will show all file names, the second is for all types. If you are familiar with windcards from CP/M, MS-DOS, or Unix, these don't behave the same.
+To list what's on a disk, you'll use `LISTFILE * * [disk]`. The first "*" is a wildcard that will show all file names, the second is for all types. If you are familiar with windcards from CP/M, MS-DOS, or Unix, these don't behave the same.
 
 he third parameter is the disk:
 
 ![list * * a](list-star-star-a.png)
 
-So... Looking at the output of `LIST` and `LIST * * A`, we can conclude we were start from disk A. In this case, A is a shortcut to disk 191 (mainframes always were supposed to have lots of disks, and our emulated one - a tricked out 4381 - has more than most companies could afford, or that would fit in most period accurate computer rooms). In our case, 191 is the "address" of the disk, and tells where the disk is connected to the virtual machine. Disks also have 6-character labels (or "VOLSER" in mainframe slang). A is "CMS190".
+So... Looking at the output of `LISTFILE` and `LISTFILE * * A`, we can conclude we were start from disk A. In this case, A is a shortcut to disk 191 (mainframes always were supposed to have lots of disks, and our emulated one - a tricked out 4381 - has more than most companies could afford, or that would fit in most period accurate computer rooms). In our case, 191 is the "address" of the disk, and tells where the disk is connected to the virtual machine. Disks also have 6-character labels (or "VOLSER" in mainframe slang). A is "CMS190".
 
 Let's check the other disks:
 
@@ -189,7 +191,7 @@ VMARC LIST GAMES VMARC D
 Let's get one of the games:
 
 ```text
-vmarc unpack games vmarc d tictoe module d
+VMARC UNPACK GAMES VMARC D TICTOE MODULE D
 ```
 
 It's there!
