@@ -64,9 +64,9 @@ TYPE PROFILE EXEC
 
 ![type profile exec](type-profile-exec.png)
 
-I am not sure whether PC-DOS copied the "dir" and "type" command from CP/M or from CMS (or CP), but they do more or less the same as you would expect on the smaller computers.
+Unlike Unix, commands and file names are case insensitive, so it's fine to type them either way. Be careful, however, so you don't overwrite your files accidentally.
 
-As for the PROFILE program, we'll look at it later.
+As for the PROFILE program, we'll look at it in more detail later.
 
 ### Running a BASIC program
 
@@ -201,14 +201,14 @@ It's there!
 Now we want to run it.
 
 ```text
-tictoe
+TICTOE
 ```
 
 ... and it works!
 
 ![tictoe](tictoe.png)
 
-As most people know, the only winning move with Tic Tac Toe is not to play. The other games are a lot more interesting.
+As most people know, the only winning move with Tic Tac Toe (and Global Thermonuclear War) is not to play. The other games are a lot more interesting.
 
 ### Moar games
 
@@ -222,7 +222,7 @@ ZORK     VMARC    D1  V    80   8865    909  01/03/26    0:37  CMS192
 
 The first one, `VM86F155`, has a lot of games in BASIC you can explore and modify (it you figure out how `EDIT` works).
 
-The ZORK code is in FORTRAN, and, while there is a program called GENZORK, it fails (maybe it needs to run on a disk at B).
+The ZORK code is in FORTRAN, and, while there is a program called `GENZORK`, it fails (maybe it needs to run on a disk at B).
 
 ![GENZORK ABEND'ing](zork-fail.png)
 
