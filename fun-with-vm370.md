@@ -252,4 +252,14 @@ In the meantime, if you want to rename the CMSUSER VM to your preferred name (an
 
 (is this even possible?)
 
+### Printing
+
+#### To a virtual printer
+
+#### To a real printer
+
+### Using a "normal" terminal
+
+Enabling access via a printing terminal (not screen-based).
+
 &copy; 2025-2026 Ricardo Bánffy
