@@ -248,15 +248,23 @@ In the meantime, if you want to rename the CMSUSER VM to your preferred name (an
 
 #### Mounting a disk on another running Hercules instance
 
+Hercules can run without in [Shared Device Server](https://sdl-hercules-390.github.io/html/shared.html) mode.
+
+[Details TBA]
+
 #### TCP/IP networking on VM370
 
-(is this even possible?)
+[TBA]
 
 ### Printing
 
 #### To a virtual printer
 
+Hercules supports routing a printer to a local file. On the packaged version of MVT 3.8j a [1403 line printer](https://en.wikipedia.org/wiki/IBM_1403) is mapped to the `prt/prt00f.txt` file, and on VM/370 there are two 1403 printers, mapped to `io/print1.listing` and `io/print2.listing`. On the container images, these files are not exposed to the host directly, and you'll have to map the container folder to the host yourself.
+
 #### To a real printer
+
+[TBA]
 
 ### Using a "normal" terminal
 
