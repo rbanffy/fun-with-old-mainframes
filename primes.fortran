@@ -1,0 +1,26 @@
+C PRIME NUMBER PROBLEM
+C FROM IBM System/360 Operating System FORTRAN IV Programmer's Guide
+C https://bitsavers.org/pdf/ibm/360/fortran/
+C GC28-6817-4_OS360_FORTRAN_IV_G_and_H_Programmers_Guide_197309.pdf
+C page 108
+  100 WRITE (6,8)
+    8 FORMAT (52H FOLLOWING IS A LIST OF PRIME NUMBERS FROM 1 TO 1000/
+     X 119X,1H1/19X,1H2/19X,1H3)
+  101 I=5
+    3 A=I
+  102 A=SQRT(A)
+  103 J=A
+  104 DO 1 K=3,J,2
+  105 L=I/K
+  106 IF(L*K-I)1,2,4
+    1 CONTINUE
+  107 WRITE (6,5)I
+    5 FORMAT (I20)
+    2 I=I+2
+  108 IF(1000-I)7,4,3
+    4 WRITE (6,9)
+    9 FORMAT (14H PROGRAM ERROR)
+    7 WRITE (6,6)
+    6 FORMAT (31H THIS IS THE END OF THE PROGRAM)
+  109 STOP
+      END
