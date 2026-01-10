@@ -122,7 +122,95 @@ TYPE HELLO FORTRAN
 
 #### Let's compile that FORTRAN program (so we can run it)
 
-[TBA]
+To compile it, run:
+
+```text
+FORTRAN HELLO
+```
+
+The computer will output: 
+
+```text
+FORTRAN IV (G) COMPILATION COMPLETE.
+Ready; T=0.84/2.59 23:39:34
+```
+
+It's about time we mention the message. It's telling me the program run using 0.84 seconds of CPU and took 2.59 seconds to complete. It also told me what time it is for the computer.
+
+After compiling the program, you might have noticed two new files appeared:
+
+```text
+HELLO    LISTING  A1  F   120     19      3  01/09/26   23:39  CMS191
+HELLO    TEXT     A1  F    80     14      2  01/09/26   23:39  CMS191
+```
+
+The first one is a nicely formatted listing, and, in ancient times, you'd find it printed alongside the punched cards you submitted for compilation. It is formatted for 132 columns, as big printers of the time used to be.
+
+```text
+   FORTRAN IV G LEVEL  21                 MAIN              DATE = 26009  TIME = 23.39.33             PAGE 0001
+    0001              WRITE(6,1)                                                        HEL00010
+    0002         1    FORMAT('HELLO WORLD FROM FORTRAN')                                HEL00020
+    0003              STOP                                                              HEL00030
+    0004              END                                                               HEL00040
+   FORTRAN IV G LEVEL  21                 MAIN              DATE = 26009  TIME = 23.39.33             PAGE 0002
+ 
+                                SUBPROGRAMS CALLED
+  SYMBOL    LOCATION      SYMBOL    LOCATION      SYMBOL    LOCATION      SYMBOL    LOCATION      SYMBOL    LOCATION
+  IBCOM#        90
+ 
+                                FORMAT STATEMENT MAP
+  SYMBOL    LOCATION      SYMBOL    LOCATION      SYMBOL    LOCATION      SYMBOL    LOCATION      SYMBOL    LOCATION
+       1        94
+ 
+     *OPTIONS IN EFFECT*  ID,EBCDIC,SOURCE,NOLIST,NODECK,LOAD,MAP
+     *OPTIONS IN EFFECT*  NAME = MAIN    , LINECNT =       60
+     *STATISTICS*    SOURCE STATEMENTS =        4,PROGRAM SIZE =      298
+     *STATISTICS*  NO DIAGNOSTICS GENERATED
+```
+
+The other is telling me it's a text, but it appears it's a lie:
+
+![type hello text](type-hello-text.png)
+
+In order to run the Fortran program we just compiled, we'll do:
+
+```text
+LOAD HELLO ( START
+```
+
+Let's see what that means:
+
+![help load](help-load.png)
+
+So... `LOAD` will load one or more relocatable object code, which is the `TEXT` file (we knew it was a lie!). So, we are asking LOAD to load the `HELLO TEXT` file, and we are passing the `START` option to it (so the code runs).
+
+```text
+LOAD HELLO ( START
+Execution begins...
+Ready; T=1.23/3.90 00:09:54
+```
+
+Looks like nothing happened. But it actually did. There is a new file:
+
+```text
+FILE     FT06F001 A1  V    24      1      1  01/10/26    0:09  CMS191
+```
+
+If we look into it, we'll see:
+
+![file ft06f001](type-file-ft06f001.png)
+
+So, the program ran, and the output went into this oddly named file.
+
+#### Other interesting languages available
+
+##### C
+
+##### Pascal
+
+##### ALGOL
+
+This is interesting - there is a VM without a login that has the name ALGOL. [TBA]
 
 ### Navigating the disks
 
@@ -228,6 +316,8 @@ The ZORK code is in FORTRAN, and, while there is a program called `GENZORK`, it 
 
 Let me know if you figure it out.
 
+[Solution TBA]
+
 ### Adding a user for you
 
 It's no fun to log in as CMSUSER every time you want to do something. You'll want a user for yourself, with reasonable permissions to do things to the machine. In my case, I want to create an "RBANFFY" user for me.
@@ -248,7 +338,7 @@ In the meantime, if you want to rename the CMSUSER VM to your preferred name (an
 
 #### Mounting a disk on another running Hercules instance
 
-Hercules can run without in [Shared Device Server](https://sdl-hercules-390.github.io/html/shared.html) mode.
+Hercules can run without a UI in [Shared Device Server](https://sdl-hercules-390.github.io/html/shared.html) mode. In this mode, it can start and no environment needs to be IPL'ed.
 
 [Details TBA]
 
