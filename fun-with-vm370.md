@@ -271,7 +271,7 @@ There is a lot of code you can use. For exaple, the [IBM System/360 Operating Sy
 
 ```fortran
 C PRIME NUMBER PROBLEM
-C FROM IBM System/360 Operating System FORTRAN IV Programmer's Guide
+C FROM IBM System/360 Operating System FORTRAN IV Programmers Guide
 C https://bitsavers.org/pdf/ibm/360/fortran/
 C GC28-6817-4_OS360_FORTRAN_IV_G_and_H_Programmers_Guide_197309.pdf
 C page 108
