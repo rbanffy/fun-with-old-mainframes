@@ -202,6 +202,131 @@ If we look into it, we'll see:
 
 So, the program ran, and the output went into this oddly named file.
 
+See the "6" in the middle of the file type? We can redirect the output to the terminal:
+
+```text
+FILEDEF 6 TERMINAL
+```
+
+![ELLO WORLD](ello-world.png)
+
+Now the program outputs to the terminal. Why the first character is missing is an interesting problem. I am not sure why this is happening, neither are my current mainframe gurus. Our current best guess is that "H" would be telling something to the terminal and, therefore, the terminal isn't showing it. If you know, please file a bug and a PR with an explanation.
+
+What was the magic we used? Let's see what FILEDEF does. Do a `HELP FILEDEF`:
+
+```text
+FILEDEF                                                   CMS Transient command
+                                                                               
+Use the FILEDEF command to establish data definitions for OS ddnames, to define
+files to be copied with the MOVEFILE command, or to override default file      
+definitions made by the assembler and the OS language processors.  The format  
+of the FILEDEF command is:                                                     
++----------+------------------------------------------------------------------+
+| FIledef  | ddname nn *  device                                              |
+|          |                                                                  |
+|          | device:                                                          |
+|          |    Terminal [(optionA optionD[)]]                                |
+|          |    PRinter  [(optionD[)]]                                        |
+|          |    PUnch    [(optionD[)]]                                        |
+|          |    Reader   [(optionD[)]]                                        |
+|          |    DISK [FILE|fn ddname|ft [A1|fm]] [DSN ?|q1 q2 ...]            |
+|          |             [(optionA optionB[)]]                                |
+|          |    DUMMY    [(optionA[)]]                                        |
+|          |    TAPn     [(optionA optionC[)]]                                |
+|          |    CLEAR                                                         |
+|          | optionA:                                                         |
+|          |    BLOCK|BLKSIZE nnnnn  CHANGE|NOCHANGE     LRECL nnnnn          |
+|          |    PERM                 RECFM a                                  |
+|          | optionB:                                                         |
+|          |    CONCAT               DISP MOD            DSORG PS|PO|DA|IS    |
+|          |    KEYLEN nnn           LIMCT nnn           MEMBER name          |
+|          |    OPTCD a              XTENT 50|nnnnn                           |
+|          | optionC:                                                         |
+|          |    7TRACK|9TRACK        TRTCH a             DEN den              |
+|          | optionD:                                                         |
+|          |    UPCASE|LOWCASE                                                |
++----------+------------------------------------------------------------------+
+where:                                                                         
+                                                                               
+ddname | nn | *                                                                
+         is the name  by which the file is referred to in your program.  OS    
+         ddname syntax rules should be followed.  If a number nn is specified, 
+         it is translated to a FORTRAN data definition name of FTnnF001.  An   
+         asterisk (*) may be specified with the CLEAR operand to indicate that 
+         all file definitions not entered with the PERM option should be       
+         cleared.                                                              
+                                                                               
+Devices:                                                                       
+                                                                               
+Terminal is your terminal (terminal I/O must not be blocked).  Terminal input  
+         will be truncated to the console input buffer length of 130           
+         characters.                                                           
+```
+
+... and so on. Fortran, by default, outputs to whatever is defined as file "6", which ends up being "FILE FT06F001". This is all related to the way batch processes were set up where things like input and outputs were specified by a configuration for when a program is run. This was done in a language called JCL (for Job Control Language). It was uncommon for programs to be run interactively at the terminal, and even having a terminal was considered a luxury most programmers didn't have - they'd submit their code in special forms that someone else would type, convert to punch cards, and feed to the compiler.
+
+#### Running our own programs
+
+There is a lot of code you can use. For exaple, the [IBM System/360 Operating System FORTRAN IV Programmer's Guide](https://bitsavers.org/pdf/ibm/360/fortranGC28-6817-4_OS360_FORTRAN_IV_G_and_H_Programmers_Guide_197309.pdf) has an example, [primes.fortran](primes.fortran) I copied into this repo:
+
+```fortran
+C PRIME NUMBER PROBLEM
+C FROM IBM System/360 Operating System FORTRAN IV Programmer's Guide
+C https://bitsavers.org/pdf/ibm/360/fortran/
+C GC28-6817-4_OS360_FORTRAN_IV_G_and_H_Programmers_Guide_197309.pdf
+C page 108
+C Modified for brevity from 1 to 1000 to 1 to 100
+  100 WRITE (6,8)
+    8 FORMAT (52H FOLLOWING IS A LIST OF PRIME NUMBERS FROM 1 TO 100 /
+     X 119X,1H1/19X,1H2/19X,1H3)
+  101 I=5
+    3 A=I
+  102 A=SQRT(A)
+  103 J=A
+  104 DO 1 K=3,J,2
+  105 L=I/K
+  106 IF(L*K-I)1,2,4
+    1 CONTINUE
+  107 WRITE (6,5)I
+    5 FORMAT (I20)
+    2 I=I+2
+  108 IF(100-I)7,4,3
+    4 WRITE (6,9)
+    9 FORMAT (14H PROGRAM ERROR)
+    7 WRITE (6,6)
+    6 FORMAT (31H THIS IS THE END OF THE PROGRAM)
+  109 STOP
+      END
+```
+
+When you upload it, make sure it's fixed length at 80 characters, as punched cards were. If you forget, you'll get a helpful error message:
+
+```text
+FILE 'PRIMES FORTRAN' IS NOT FIXED, 80 CHAR. RECORDS.
+```
+
+Upload like this:
+
+![upload primes](upload-orimes-fortran.png)
+
+You'll now see that the file is now of fixed 80 character width (`F 80` in the format column).
+
+```text
+Filename Filetype Fm  Format    Recs Blocks    Date     Time   Label
+...
+PRIMES   FORTRAN  A1  F    80     27      3  01/11/26   14:47  CMS191
+```
+
+Now you can compile and run it:
+
+![load primes ( start](load-primes-1.png)
+
+Again we see some oddness at the start of the output.
+
+![load primes ( start](load-primes-2.png)
+
+... but we can see the program completed successfully.
+
 #### Other interesting languages available
 
 ##### C
