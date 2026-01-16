@@ -419,7 +419,7 @@ As most people know, the only winning move with Tic Tac Toe (and Global Thermonu
 
 ### Moar games
 
-Other two game archives that are easy to obtain are under the [VM-370-Games](https://github.com/marXtevens/VM-370-Games) repo on Github. Once you download the files to your desktop and sent them to your VMS machine, you'll have:
+Other two game archives that are easy to obtain are under the [VM-370-Games](https://github.com/marXtevens/VM-370-Games) repo on Github. Once you download the files to your desktop and sent them to your VM/370 machine, you'll have:
 
 ```text
 Filename Filetype Fm  Format    Recs Blocks    Date     Time   Label
@@ -447,7 +447,9 @@ Here's the first shock for those who come from other platforms - you wouldn't cr
 
 Creating a VM is a bit involved - you'll need to do a lot of things before - allocate and format storage, for instance. We'll leave that for later.
 
-In the meantime, if you want to rename the CMSUSER VM to your preferred name (and changing the password), we can explain that For that, we'll start logging on as MAINT (which means, logging on to the MAINT VM).
+In the meantime, if you want to rename the CMSUSER VM to your preferred name (and change the password), we can explain that. We'll start logging on as MAINT (which means, logging on to the MAINT VM).
+
+![logon maint](logon-maint-cpcms.png)
 
 #### Editing USER DIRECT
 
