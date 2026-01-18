@@ -4,11 +4,9 @@
 
 This page assumes you have a machine (emulated or not) running the VM370 Community Edition OS available. There are a couple ways to get one, and you might want to choose the one that appeals to you the most (or the one that's less work - it's up to you).
 
-> **Note:** This is still very incomplete - I am accepting suggestions of other fun things to do.
-
 ### With Docker
 
-This assumes you have Docker installed. If you do, you can just issue a shell command to have your own machine.
+The easiest way to run this is with Docker installed. How to install it depends on your platform, and we won't cover it here. Besides, Docker is only one option - you can use [Podman](https://podman.io/) as well - it has some nice features. When you are set up, you can just issue a shell command to have your own machine.
 
 ```shell
 docker run -n vm370 -p 3270:3270 rbanffy/vm370ce
@@ -16,17 +14,13 @@ docker run -n vm370 -p 3270:3270 rbanffy/vm370ce
 
 This will bring up the machine and display the Hercules console on your terminal.
 
-### With Hercules
+The container image we are using is based on the excellent work of the VM/370 Community Edition team. You can see their releases on [vm370.org](https://vm370.org/vm370/).
 
-If you don't have Hercules installed on your machine, you can install it on any civilised operating system with its package manager GUI. If you want a command-line shortcut, use something like:
+### 3270 terminals
 
-```shell
-sudo dnf install sdl-hercules
-```
+IBM mainframes used screen-oriented terminals. They worked more or less like a web browser - the mainframe would send you a screen with a form, you'd write some information on the fields of the form, and the terminal would send the information back to the mainframe, restarting the cycle. Our examples use the x3270 emulator that's available on any modern Unix-like environment (which includes Linux).
 
-Package name and version varies depending on which operating system you are using. If you are on Windows, you'll need to find the installer - start from the [GitHub repo](https://github.com/SDL-Hercules-390/hyperion).
-
-Then you'll need to set up the VM370 environment. The website at [vm370.org](https://vm370.org/vm370/) details the process.
+Start x3270 and connect it to your host. If you are running on your computer, it'll be "localhost:3270". Since I'm running mine on a small cluster, I'll point the terminal to the entry address in the cluster.
 
 With that taken out of our way, we can start to have fun.
 
