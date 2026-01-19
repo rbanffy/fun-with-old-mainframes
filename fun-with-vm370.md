@@ -489,7 +489,7 @@ To navigate, you can use EDIT's commands `up` and `down`. When you follow them w
 
 ![The first VM defined](down-14.png)
 
-This is how you define VMs. They are called users, so you might be confused. Some VMs start automatically while others will only be started (and will shut down) on `LOGOFF`. This first definitions are, as the comment explains, created to make it easier to define your own users, and you can't log-on to them yourself.
+This is how you define VMs. They are called users here, so you might be confused. Some VMs start automatically while others will only be started on `LOGON` (and will shut down on `LOGOFF`). This first definitions are, as the comment explains, created to make it easier to define your own users, and you can't log-on to them yourself.
 
 The file gets more interesting when you look at the ASSIST user. Do a `LOCATE ASSIST`:
 
@@ -497,7 +497,7 @@ The file gets more interesting when you look at the ASSIST user. Do a `LOCATE AS
 
 > Note: The user ALGOL is also interesting, but we won't talk about it right now.
 
-Here you see a couple commands before the disk definitions. They tell the user will log-on to the CMS operating environment (IPL means "Initial Program Load" and is what other systems would call "boot"). It'll then tell how the console is to be used (like an [IBM 3215](https://sharktastica.co.uk/keyboard-directory/gKVHfa1f) console as device 009). It'll also set up a card puncher and a reader (one [IBM 2540](https://en.wikipedia.org/wiki/IBM_2540) connected on 00C and 00D) and a printer (an [IBM 1403](https://en.wikipedia.org/wiki/IBM_1403)).
+Here you see a couple commands before the disk definitions. They tell the user will log-on to the CMS operating environment (IPL means "Initial Program Load" and is what other systems would call "boot"). It'll then tell how the console is to be used (like an [IBM 3215](https://sharktastica.co.uk/keyboard-directory/gKVHfa1f) console as device 009). It'll also set up a card reader/puncher (one [IBM 2540](https://en.wikipedia.org/wiki/IBM_2540) connected on 00C and 00D) and a printer (an [IBM 1403](https://en.wikipedia.org/wiki/IBM_1403)).
 
 ```text
 USER ASSIST ASSIST 15M 16M G 
@@ -562,7 +562,24 @@ The first five disks are the ones defined in `USER DIRECT` in the MDISK lines. T
 
 To exit EDIT saving your changes, use the `FILE` command. To leave without saving changes, use `QUIT`. You'll need to clear the terminal to continue (the "MORE..." message in the bottom right).
 
-Another interesting file you might look into. It is a comprehensive list of all disk partitioins, the users those partitions are used by, the CUU they are attached to, and the start and end of the partition, in cylinders.
+Another interesting file you might look into. It is a comprehensive list of all disk partitioins, the users those partitions are used by, the CUU they are attached to, and the start and end of the partition, in cylinders. All entries look like this one:
+
+```text
+VOLUME   USERID      CUU   DEVTYPE   START      END     SIZE
+GCCBRX   $ALLOC$     110      3350   00000    00000    00001
+                                     00001    00050    00050    GAP
+         MAINTC      293      3350   00051    00100    00050
+         MAINTC      191      3350   00101    00150    00050
+         MAINTC      394      3350   00151    00200    00050
+         MAINTC      194      3350   00201    00250    00050
+         MAINTC      395      3350   00251    00300    00050
+         MAINTC      393      3350   00301    00350    00050
+         MAINTC      193      3350   00351    00400    00050
+         MAINTC      493      3350   00401    00450    00050
+         MAINTC      19C      3350   00451    00500    00050
+         MAINTC      195      3350   00501    00550    00050
+         MAINTC      295      3350   00551    00551    00001
+```
 
 Creating a new user (or VM) would be more work than I'd like to cover here. It'd mean adding new disks, partitioning them, creating filesystems, and adding them to the configuration. 
 
