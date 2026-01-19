@@ -437,6 +437,10 @@ Let me know if you figure it out.
 
 [Solution TBA]
 
+We are done with CMSUSER for now, so we'll be good users and log off our machine:
+
+![logoff](logoff.png)
+
 ### Adding a user for you
 
 It's no fun to log in as CMSUSER every time you want to do something. You'll want a user for yourself, with reasonable permissions to do things to the machine. In my case, I want to create an "RBANFFY" user for me.
