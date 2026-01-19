@@ -455,9 +455,122 @@ In the meantime, if you want to rename the CMSUSER VM to your preferred name (an
 
 ![logon maint](logon-maint-cpcms.png)
 
+We'll also learn a lot of interesting things about our system, and a couple new commands for the `EDIT` editor.
+
 #### Editing USER DIRECT
 
+The first thing we want to do is to check which disks are available to this VM.
+
+Note that we share a couple disks with other VMs. This is counterintuitive to people used to do VMs the Windows or Linux way - under VM/370 (and its descendants) VMs can share filesystems, not disks. Think of it as mounting a remote filesystem, but there is no remote server - this is done within the hypervisor. We are sharing volumes CMSDSK, MNT29D and MNT19E with other users (we saw it logged in as CMSUSER).
+
+![MAINT's disks](maint-query-disk.png)
+
+The file we want to look into is `USER DIRECT`. Let's first find where it is located. Use `LISTFILE USER DIRECT *` to list files named `USER DIRECT` in all volumes you can access. Your terminal will show something like:
+
+```text
+LISTFILE USER DIRECT *
+USER     DIRECT   A1
+Ready; T=0.07/0.13 12:20:46
+```
+
+So, we see the file is in our default disk (A), which is volume MNT191. Let's edit it - on your terminal, run `EDIT USER DIRECT`.
+
+![Editing USER DIRECT](edit-user-direct.png)
+
+The top line tells you the file and the mode you are working in. 
+
+```text
+EDIT    USER     DIRECT   A1  F  80 ZONE=  1- 72 VERFY=  1- 72 CASE=U TRUNC= 72
+```
+
+This tells me we have the `USER DIRECT` file, located on `A` (ignore the 1 for now), that it is a fixed line length file of 80 columns (`F  80`), and that everything we type will be converted to uppercase (`CASE=U`). It also says `TRUNC= 72` to tell us we can't go past column 72. This was used for punchcards to identify the card (which is a line in the file).
+
+To navigate, you can use EDIT's commands `up` and `down`. When you follow them with a number, they repeat the operation that number of times. If you are lost, you can use `top` or `bottom` to get to the top of the end of the bottom of the file. Let's do a `DOWN 14`.
+
+![The first VM defined](down-14.png)
+
+This is how you define VMs. They are called users, so you might be confused. Some VMs start automatically while others will only be started (and will shut down) on `LOGOFF`. This first definitions are, as the comment explains, created to make it easier to define your own users, and you can't log-on to them yourself.
+
+The file gets more interesting when you look at the ASSIST user. Do a `LOCATE ASSIST`:
+
+![locate assist](locate-assist.png)
+
+> Note: The user ALGOL is also interesting, but we won't talk about it right now.
+
+Here you see a couple commands before the disk definitions. They tell the user will log-on to the CMS operating environment (IPL means "Initial Program Load" and is what other systems would call "boot"). It'll then tell how the console is to be used (like an [IBM 3215](https://sharktastica.co.uk/keyboard-directory/gKVHfa1f) console as device 009). It'll also set up a card puncher and a reader (one [IBM 2540](https://en.wikipedia.org/wiki/IBM_2540) connected on 00C and 00D) and a printer (an [IBM 1403](https://en.wikipedia.org/wiki/IBM_1403)).
+
+```text
+USER ASSIST ASSIST 15M 16M G 
+ IPL CMS                     
+ CONSOLE 009 3215            
+ SPOOL 00C 2540 READ A       
+ SPOOL 00D 2540 PUNCH A      
+ SPOOL 00E 1403 A 
+```
+
+> Note: The first line tells us the user name (`ASSISS`), the password (yes, in clear text), and how much memory the machine should have allocated.
+
+Let's now look into the user we might want to rename. In EDIT, do a LOCATE CMSUSER:
+
+```text
+USER CMSUSER CMSUSER 15M 16M G                                
+ IPL CMS                                                      
+ CONSOLE 009 3215                                             
+ SPOOL 00E 1403 A                                             
+ SPOOL 00C 2540 READ *                                        
+ SPOOL 00D 2540 PUNCH A                                       
+ LINK MAINT 190 190 RR                                        
+ LINK MAINT 19D 19D RR                                        
+ LINK MAINT 19E 19E RR                                        
+*        cuu type adr num volser mode readpw   writepw  multpw
+ MDISK   191 3350 001 115 VM50U0 MR   ALL      WRITE    MULT  
+ MDISK   192 3350 116 115 VM50U0 MR   ALL      WRITE    MULT  
+ MDISK   193 3350 231 115 VM50U0 MR   ALL      WRITE    MULT  
+ MDISK   194 3350 346 115 VM50U0 MR   ALL      WRITE    MULT  
+ MDISK   195 3350 461 094 VM50U0 MR   ALL      WRITE    MULT  
+```
+
+Now you'll want to open a second x3270 window and log on as CMSUSER.
+
+```text
+LOGON CMSUSER CMSUSER
+DASD 190 LINKED R/O; R/W BY MAINT; R/O BY 004 USERS
+DASD 19D LINKED R/O; R/W BY MAINT; R/O BY 002 USERS
+DASD 19E LINKED R/O; R/W BY MAINT; R/O BY 004 USERS
+LOGON AT 13:10:22 GMT MONDAY 01/19/26
+VM Community Edition V1 R1.2
+```
+
+Notice these are the 3 disks mentioned in the LINK commands after the card reader/puncher and the printer are added. They are being linked from the user MAINT
+
+ When there, do a `QUERY DISK`:
+
+```text
+ Label  CUU M  Stat  Cyl Type Blksize   Files  Blks Used-(%) Blks Left  Blk Total
+CMS191 191 A   R/W  115 3350  800          7        111-00      65420      65531
+CMS192 192 D   R/W  115 3350  800          0          5-00      65526      65531
+CMS193 193 E   R/W  115 3350  800          0          5-00      65526      65531
+CMS194 194 F   R/W  115 3350  800          0          5-00      65526      65531
+CMS195 195 G   R/W   94 3350  800          0          5-00      53575      53580
+CMSDSK 190 S   R/O   59 3350  800        172      19537-58      14093      33630
+MNT29D 19D U/S R/O   30 3350  800        407       6242-37      10858      17100
+MNT19E 19E Y/S R/O   70 3350  800        710      28263-71      11637      39900
+Ready; T=0.13/0.82 13:19:36
+```
+
+The first five disks are the ones defined in `USER DIRECT` in the MDISK lines. The last 3 are the ones LINK'ed from MAIN.
+
+To exit EDIT saving your changes, use the `FILE` command. To leave without saving changes, use `QUIT`. You'll need to clear the terminal to continue (the "MORE..." message in the bottom right).
+
+Another interesting file you might look into. It is a comprehensive list of all disk partitioins, the users those partitions are used by, the CUU they are attached to, and the start and end of the partition, in cylinders.
+
+Creating a new user (or VM) would be more work than I'd like to cover here. It'd mean adding new disks, partitioning them, creating filesystems, and adding them to the configuration. 
+
+If you want, you might change the CMSUSER user name and password (passwords can't have more than 8 characters and are case insensitive). Keep in mind this is how it used to be in the 1970s - modern mainframes are much better protected.
+
 #### Updating the USER directory
+
+[TBA]
 
 ### Talking to other mainframes
 
