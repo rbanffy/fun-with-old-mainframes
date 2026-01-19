@@ -581,9 +581,11 @@ GCCBRX   $ALLOC$     110      3350   00000    00000    00001
          MAINTC      295      3350   00551    00551    00001
 ```
 
-Creating a new user (or VM) would be more work than I'd like to cover here. It'd mean adding new disks, partitioning them, creating filesystems, and adding them to the configuration. 
+Creating a new user (or VM) would be more work than I'd like to cover here. It'd mean adding new disks, partitioning them, creating filesystems, and adding them to the configuration. Perhaps more importantly, it'd require me to learn a whole lot of things before I could confidently do it.
 
-If you want, you might change the CMSUSER user name and password (passwords can't have more than 8 characters and are case insensitive). Keep in mind this is how it used to be in the 1970s - modern mainframes are much better protected.
+So, instead of creating a new user, we'll change the CMSUSER user name and password (passwords can't have more than 8 characters and are case insensitive). Keep in mind this is how it used to be in the 1970s - modern mainframes are much better protected.
+
+My plan of having a user for me, one for my wife, and users for my kids will have to wait for another day.
 
 #### Updating the USER directory
 
