@@ -9,10 +9,10 @@ This page assumes you have a machine (emulated or not) running the VM370 Communi
 The easiest way to run this is with Docker installed. How to install it depends on your platform, and we won't cover it here. Besides, Docker is only one option - you can use [Podman](https://podman.io/) as well - it has some nice features. When you are set up, you can just issue a shell command to have your own machine.
 
 ```shell
-docker run -n vm370 -p 3270:3270 rbanffy/vm370ce
+docker run -it --name vm370 -p 3270:3270 rbanffy/vm370ce
 ```
 
-This will bring up the machine and display the Hercules console on your terminal.
+This will bring up the machine and display the machine's console on your terminal.
 
 The container image we are using is based on the excellent work of the VM/370 Community Edition team. You can see their releases on [vm370.org](https://vm370.org/vm370/).
 
