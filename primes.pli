@@ -1,0 +1,24 @@
+PRIMES: PROCEDURE OPTIONS(MAIN);
+  DECLARE (C, N, D, P) FIXED BINARY;
+  C = 0;
+  N = 2;
+LOOP:
+  IF C >= 20 THEN GO TO FINISH;
+  P = 1;
+  D = 2;
+CHECK:
+  IF D > N - 1 THEN GO TO TEST_PRIME;
+  IF (N / D) * D ^= N THEN GO TO NEXT_D;
+  P = 0;
+NEXT_D:
+  D = D + 1;
+  GO TO CHECK;
+TEST_PRIME:
+  IF P ^= 1 THEN GO TO NEXT_N;
+  PUT SKIP EDIT (N) (F(3));
+  C = C + 1;
+NEXT_N:
+  N = N + 1;
+  GO TO LOOP;
+FINISH:
+END PRIMES;

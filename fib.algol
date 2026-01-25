@@ -1,0 +1,17 @@
+begin
+  integer F1, F2, F3, I;
+  F1 := 0;
+  F2 := 1;
+  outinteger(1, F1);
+  outstring(1, "\n");
+  outinteger(1, F2);
+  outstring(1, "\n");
+  for I := 3 step 1 until 20 do
+  begin
+    F3 := F1 + F2;
+    outinteger(1, F3);
+    outstring(1, "\n");
+    F1 := F2;
+    F2 := F3;
+  end;
+end

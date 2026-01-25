@@ -1,0 +1,13 @@
+FIB: PROCEDURE OPTIONS(MAIN);
+  DECLARE (F1, F2, F3, I) FIXED BINARY;
+  F1 = 0;
+  F2 = 1;
+  PUT SKIP EDIT (F1) (F(10));
+  PUT SKIP EDIT (F2) (F(10));
+  DO I = 3 TO 20;
+    F3 = F1 + F2;
+    PUT SKIP EDIT (F3) (F(10));
+    F1 = F2;
+    F2 = F3;
+  END;
+END FIB;
