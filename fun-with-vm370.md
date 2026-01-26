@@ -6,7 +6,7 @@ This page assumes you have a machine (emulated or not) running the VM370 Communi
 
 ### With Docker
 
-The easiest way to run this is with [Docker](https://www.docker.com/products/docker-desktop/) installed. How to install it depends on your platform, and we won't cover it here. Besides, Docker is only one option - you can use [Podman](https://podman.io/) as well - it has some nice features. When you are set up, you can just issue a shell command to have your own machine.
+The easiest way to run this is with [Docker](https://www.docker.com/products/docker-desktop/) installed. How to install it depends on your platform, and we won't cover it here. Besides, Docker is only one option - you can use [Podman](https://podman.io/) as well - it has some nice features, and can pretend it's Docker, so you can use the same commands with both. When you are set up, you can just issue a shell command to have your own machine. 
 
 ```shell
 docker run -it --name vm370 -p 3270:3270 rbanffy/vm370ce
@@ -636,5 +636,9 @@ Hercules supports routing a printer to a local file. On the packaged version of 
 ### Using a "normal" terminal
 
 Enabling access via a printing terminal (not screen-based).
+
+### Where to get more software
+
+https://www.vm.ibm.com/download/packages/#
 
 &copy; 2025-2026 Ricardo Bánffy
