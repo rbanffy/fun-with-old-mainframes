@@ -76,6 +76,8 @@ Now we need to move down 12 lines. The command space is in the bottom of the scr
 
 Now, to save the file and exit, enter `FILE`. You'll see the MORE prompt in the bottom right - this indicates you need to press the PA2 key (Alt-2) to continue. 3270 terminals are screen oriented (think web browsers in the 1960s) and don't scroll - you need to ask them for the next page. This has the advantage of allowing you to edit information on your screen and only causing the computer (the mainframe, in our case) to pay attention when you send it the information you edited. Most other computers that use terminals have to deal with each keystroke separately.
 
+With this change done, the welcome message will not be displayed when you log in.  If you want to see it again, you'll need to type `TYPE PROFILE EXEC U`. Try it.
+
 ### Running a BASIC program
 
 What is a vintage computer without a BASIC interpreter, right?
