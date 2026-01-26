@@ -14,7 +14,11 @@ docker run -it --name vm370 -p 3270:3270 rbanffy/vm370ce
 
 This will bring up the machine and display the machine's console on your terminal.
 
-The container image we are using is based on the excellent work of the VM/370 Community Edition team. You can see their releases on [vm370.org](https://vm370.org/vm370/).
+The container image we are using is based on the excellent work of the VM/370 Community Edition team. You can see their releases on [vm370.org](https://vm370.org/vm370/). The Community Editions runs only software that's either open source or public domain.
+
+### Other options
+
+If you work in an organization that's cool enough to have an actual IBM mainframe, you can check if your operations team will allow you to have a small VM running nested VM/370 Community Edition. IBM mainframes have legendary backwards compatibility and there should be no (technical) issue bringing up an environment for you. There might be a lot of process hurdles, however, so tread carefully and have a good excuse at hand. "Doing fun stuff" is not it.
 
 ### 3270 terminals
 
