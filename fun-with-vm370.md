@@ -46,7 +46,7 @@ You can also logon using `LOGON CMSUSER CMSUSER`, typing the password after the 
 
 ![logged on](logged-on.png)
 
-At this point, you are logged on. When you press ENTER another time, a program, called "PROFILE EXEC" will be run:
+At this point, you are logged on. When you press ENTER again, a program, called "PROFILE EXEC" will run:
 
 ![profile-exec](profile-exec.png)
 
@@ -60,7 +60,21 @@ TYPE PROFILE EXEC
 
 Unlike Unix, commands and file names are case insensitive, so it's fine to type them either way. Be careful, however, so you don't overwrite your files accidentally.
 
-As for the PROFILE program, we'll look at it in more detail later.
+### Customising your PROFILE EXEC
+
+Our current `PROFILE EXEC` prints a welcome message that's informative, but that we can always read later. Let's remove that message from our profile. For that, we'll use a little bit of the `EDIT` editor.
+
+```text
+EDIT PROFILE EXEC
+```
+
+![edit profile exec](edit-profile-exec.png)
+
+Now we need to move down 12 lines. The command space is in the bottom of the screen, with the green cursor. Enter `DOWN 12`. This will move the highlight to the line we want to delete. Now use the `DELETE` command.
+
+![deleting a line](edit-profile-exec-delete.png)
+
+Now, to save the file and exit, enter `FILE`. You'll see the MORE prompt in the bottom right - this indicates you need to press the PA2 key (Alt-2) to continue. 3270 terminals are screen oriented (think web browsers in the 1960s) and don't scroll - you need to ask them for the next page. This has the advantage of allowing you to edit information on your screen and only causing the computer (the mainframe, in our case) to pay attention when you send it the information you edited. Most other computers that use terminals have to deal with each keystroke separately.
 
 ### Running a BASIC program
 
