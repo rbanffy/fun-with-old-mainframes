@@ -640,5 +640,10 @@ Enabling access via a printing terminal (not screen-based).
 ### Where to get more software
 
 https://www.vm.ibm.com/download/packages/#
+https://vmworkshop.org/HENSLER/
+
+### Other resources
+
+https://www.leeandmelindavarian.com/Melinda/
 
 &copy; 2025-2026 Ricardo Bánffy
