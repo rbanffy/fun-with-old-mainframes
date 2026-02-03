@@ -2,13 +2,11 @@
 title: Fun things to do with your VM/370 machine
 ---
 
-# Fun things to do with your VM/370 machine
-
-## Intro
+# What can I do with a VM/370 mainframe?
 
 This page assumes you have a machine (emulated or not) running the VM370 Community Edition OS available. There are a couple ways to get one, and you might want to choose the one that appeals to you the most (or the one that's less work - it's up to you).
 
-### With Docker
+## Running with Docker
 
 The easiest way to run this is with [Docker](https://www.docker.com/products/docker-desktop/) installed. How to install it depends on your platform, and we won't cover it here. Besides, Docker is only one option - you can use [Podman](https://podman.io/) as well - it has some nice features, and can pretend it's Docker, so you can use the same commands with both. When you are set up, you can just issue a shell command to have your own machine. 
 
@@ -20,11 +18,11 @@ This will bring up the machine and display the machine's console on your termina
 
 The container image we are using is based on the excellent work of the VM/370 Community Edition team. You can see their releases on [vm370.org](https://vm370.org/vm370/). The Community Editions runs only software that's either open source or public domain.
 
-### Other options
+## Other options for getting a mainframe
 
 If you work in an organization that's cool enough to have an actual IBM mainframe, you can check if your operations team will allow you to have a small VM running nested VM/370 Community Edition. IBM mainframes have legendary backwards compatibility and there should be no (technical) issue bringing up an environment for you. There might be a lot of process hurdles, however, so tread carefully and have a good excuse at hand. "Doing fun stuff" is not it.
 
-### 3270 terminals
+## 3270 terminals
 
 IBM mainframes used screen-oriented terminals. They worked more or less like a web browser - the mainframe would send you a screen with a form, you'd write some information on the fields of the form, and the terminal would send the information back to the mainframe, restarting the cycle. Our examples use the x3270 emulator that's available on any modern Unix-like environment (which includes Linux).
 
@@ -32,7 +30,7 @@ Start x3270 and connect it to your host. If you are running on your computer, it
 
 With that taken out of our way, we can start to have fun.
 
-### Logging on
+## Logging on
 
 For normal things, we'll log on to the CMSUSER VM, or, if you renamed it, to your own VM. The default password is "CMSUSER":
 
@@ -68,7 +66,7 @@ TYPE PROFILE EXEC
 
 Unlike Unix, commands and file names are case insensitive, so it's fine to type them either way. Be careful, however, so you don't overwrite your files accidentally.
 
-### Customising your PROFILE EXEC
+## Customising your PROFILE EXEC
 
 Our current `PROFILE EXEC` prints a welcome message that's informative, but that we can always read later. Let's remove that message from our profile. For that, we'll use a little bit of the `EDIT` editor.
 
@@ -86,7 +84,7 @@ Now, to save the file and exit, enter `FILE`. You'll see the MORE prompt in the 
 
 With this change done, the welcome message will not be displayed when you log in.  If you want to see it again, you'll need to type `TYPE PROFILE EXEC U`. Try it.
 
-### Running a BASIC program
+## Running a BASIC program
 
 What is a vintage computer without a BASIC interpreter, right?
 
@@ -128,7 +126,7 @@ You'll see your command ("basic hello") show up at the top of the screen (after 
 
 ![Program output](hello-world.png)
 
-### A bit of FORTRAN
+## A bit of FORTRAN
 
 VM/370 CE comes with a couple hello world programs. You can use the `DIR` command to list what files are in the disk you are seeing. We typed our own in BASIC, but there is one in C and one in FORTRAN. Let's see the FORTRAN one:
 
@@ -138,7 +136,7 @@ TYPE HELLO FORTRAN
 
 ![dir and type](dir-and-type-hello-fortran.png)
 
-#### Let's compile that FORTRAN program (so we can run it)
+### Let's compile that FORTRAN program (so we can run it)
 
 To compile it, run:
 
@@ -281,7 +279,7 @@ Terminal is your terminal (terminal I/O must not be blocked).  Terminal input
 
 ... and so on. Fortran, by default, outputs to whatever is defined as file "6", which ends up being "FILE FT06F001". This is all related to the way batch processes were set up where things like input and outputs were specified by a configuration for when a program is run. This was done in a language called JCL (for Job Control Language). It was uncommon for programs to be run interactively at the terminal, and even having a terminal was considered a luxury most programmers didn't have - they'd submit their code in special forms that someone else would type, convert to punch cards, and feed to the compiler.
 
-#### Running our own programs
+### Running our own programs
 
 There is a lot of code you can use. For exaple, the [IBM System/360 Operating System FORTRAN IV Programmer's Guide](https://bitsavers.org/pdf/ibm/360/fortran/GC28-6817-4_OS360_FORTRAN_IV_G_and_H_Programmers_Guide_197309.pdf) has an example, [primes.fortran](primes.fortran) I copied into this repo:
 
@@ -343,17 +341,17 @@ Again we see some oddness at the start of the output.
 
 ... but we can see the program completed successfully.
 
-#### Other interesting languages available
+### Other interesting languages available
 
-##### C
+#### C
 
-##### Pascal
+#### Pascal
 
-##### ALGOL
+#### ALGOL
 
 This is interesting - there is a VM without a login that has the name ALGOL. [TBA]
 
-### Navigating the disks
+## Navigating the disks
 
 The VM370CE distribution has a lot of disks. You can check which ones you have immediate access with. If you logged on as CMSUSER, you can use the LISTFILE (we abreviated it to "LIST") command to see what files are on your default disk. In CMS, commands can be abbreviated - the actual command is `LISTFILE` but `LIST` is neat enough.
 
@@ -387,7 +385,7 @@ DIR * MODULE S
 
 [Other disks TBA]
 
-### Uploading files to your machine (and playing games)
+## Uploading files to your machine (and playing games)
 
 For this example, we'll use the `GAMES.VMARC` file available at the [h390-vm group at groups.io](https://groups.io/g/h390-vm). The easiest way to upload a file to your mainframe is with the x3270 app - on the File menu select "File Transfer":
 
@@ -439,7 +437,7 @@ TICTOE
 
 As most people know, the only winning move with Tic Tac Toe (and Global Thermonuclear War) is not to play. The other games are a lot more interesting.
 
-### Moar games
+## Moar games
 
 Other two game archives that are easy to obtain are under the [VM-370-Games](https://github.com/marXtevens/VM-370-Games) repo on Github. Once you download the files to your desktop and sent them to your VM/370 machine, you'll have:
 
@@ -463,7 +461,7 @@ We are done with CMSUSER for now, so we'll be good users and log off our machine
 
 ![logoff](logoff.png)
 
-### Adding a user for you
+## Adding a user for you
 
 It's no fun to log in as CMSUSER every time you want to do something. You'll want a user for yourself, with reasonable permissions to do things to the machine. In my case, I want to create an "RBANFFY" user for me.
 
@@ -479,7 +477,7 @@ In the meantime, if you want to rename the CMSUSER VM to your preferred name (an
 
 We'll also learn a lot of interesting things about our system, and a couple new commands for the `EDIT` editor.
 
-#### Editing USER DIRECT
+### Editing USER DIRECT
 
 The first thing we want to do is to check which disks are available to this VM.
 
@@ -609,42 +607,42 @@ So, instead of creating a new user, we'll change the CMSUSER user name and passw
 
 My plan of having a user for me, one for my wife, and users for my kids will have to wait for another day.
 
-#### Updating the USER directory
+### Updating the USER directory
 
 [TBA]
 
-### Talking to other mainframes
+## Talking to other mainframes
 
-#### Mounting a disk on another running Hercules instance
+### Mounting a disk on another running Hercules instance
 
 Hercules can run without a UI in [Shared Device Server](https://sdl-hercules-390.github.io/html/shared.html) mode. In this mode, it can start and no environment needs to be IPL'ed.
 
 [Details TBA]
 
-#### TCP/IP networking on VM370
+### TCP/IP networking on VM370
 
 [TBA]
 
-### Printing
+## Printing
 
-#### To a virtual printer
+### To a virtual printer
 
 Hercules supports routing a printer to a local file. On the packaged version of MVT 3.8j a [1403 line printer](https://en.wikipedia.org/wiki/IBM_1403) is mapped to the `prt/prt00f.txt` file, and on VM/370 there are two 1403 printers, mapped to `io/print1.listing` and `io/print2.listing`. On the container images, these files are not exposed to the host directly, and you'll have to map the container folder to the host yourself.
 
-#### To a real printer
+### To a real printer
 
 [TBA]
 
-### Using a "normal" terminal
+## Using a "normal" terminal
 
 Enabling access via a printing terminal (not screen-based).
 
-### Where to get more software
+## Where to get more software
 
 https://www.vm.ibm.com/download/packages/#
 https://vmworkshop.org/HENSLER/
 
-### Other resources
+## Other resources
 
 https://www.leeandmelindavarian.com/Melinda/
 
