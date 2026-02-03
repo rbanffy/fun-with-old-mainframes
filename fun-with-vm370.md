@@ -218,9 +218,7 @@ If we look into it, we'll see:
 
 ![file ft06f001](type-file-ft06f001.png)
 
-So, the program ran, and the output went into this oddly named file.
-
-See the "6" in the middle of the file type? We can redirect the output to the terminal:
+So, the program ran, and the output went into this oddly named file. This is the first parameter of the `WRITE` statement. `WRITE(6,1)` means write to file 6 using the format defined on the line labeled 1. You can also see the "6" in the middle of the file type. We can redirect the output of file 6 to the terminal:
 
 ```text
 FILEDEF 6 TERMINAL
@@ -228,9 +226,9 @@ FILEDEF 6 TERMINAL
 
 ![ELLO WORLD](ello-world.png)
 
-Now the program outputs to the terminal. Why the first character is missing is an interesting problem. I am not sure why this is happening, neither are my current mainframe gurus. Our current best guess is that "H" would be telling something to the terminal and, therefore, the terminal isn't showing it. If you know, please file a bug and a PR with an explanation.
+Now the program outputs to the terminal. Why the first character is missing is an interesting problem. I am not sure why this is happening, neither are my current mainframe gurus. Our current best guess is that this is because the first character of a line being interpreted by the line printer. This is arcane knowledge I don't fully understand myself, The "right" way to output to a terminal is, and I've seen it done in period source code, have a space in the first column of the output string. When the system is outputting to a file, it deals with the output and the first character is suppressed, as it would be by the printer.
 
-What was the magic we used? Let's see what FILEDEF does. Do a `HELP FILEDEF`:
+What was the magic we used to redirect? Let's see what FILEDEF does. Do a `HELP FILEDEF`:
 
 ```text
 FILEDEF                                                   CMS Transient command
