@@ -1,3 +1,7 @@
+---
+title: Fun things to do with your VM/370 machine
+---
+
 # Fun things to do with your VM/370 machine
 
 ## Intro
