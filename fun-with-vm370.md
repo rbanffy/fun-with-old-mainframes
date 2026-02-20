@@ -12,7 +12,7 @@ The Community Edition is a huge set of improvements and fixes applied on top of 
 
 ## Running with Docker
 
-The easiest way to run this is with [Docker](https://www.docker.com/products/docker-desktop/) installed. How to install it depends on your platform, and we won't cover it here. Besides, Docker is only one option - you can use [Podman](https://podman.io/) as well - it has some nice features, and can pretend it's Docker, so you can use the same commands with both. When you are set up, you can just issue a shell command to have your own machine. 
+The easiest way to run this is with [Docker](https://www.docker.com/products/docker-desktop/) installed. How to install it depends on your platform, and we won't cover it here. Besides, Docker is only one option - you can use [Podman](https://podman.io/) as well - it has some nice features, and can pretend it's Docker, so you can use the same commands with both. When you are set up, you can just issue a shell command to have your own machine.
 
 ```shell
 docker run -it --name vm370 -p 3270:3270 rbanffy/vm370ce
@@ -30,7 +30,9 @@ Another possible source of used mainframes is eBay or your local IT asset dispos
 
 ## 3270 terminals
 
-IBM mainframes used screen-oriented terminals. They worked more or less like a web browser - the mainframe would send you a screen with a form, you'd write some information on the fields of the form, and the terminal would send the information back to the mainframe, restarting the cycle. Our examples use the x3270 emulator that's available on any modern Unix-like environment (which includes Linux).
+IBM mainframes use screen-oriented terminals. They worked more or less like a web browser - the mainframe would send you a screen with a form, you'd write some information on the fields of the form, and the terminal would send the information back to the mainframe, restarting the cycle. If you think this looks like how HTML forms work, you are right, but this was in the late 1960s, not the mid 1990s.
+
+Our examples use the x3270 emulator that's available on any modern Unix-like environment (which includes Linux).
 
 Start x3270 and connect it to your host. If you are running on your computer, it'll be "localhost:3270". Since I'm running mine on a small cluster, I'll point the terminal to the entry address in the cluster.
 
@@ -88,13 +90,13 @@ Now we need to move down 12 lines. The command space is in the bottom of the scr
 
 Now, to save the file and exit, enter `FILE`. You'll see the MORE prompt in the bottom right - this indicates you need to press the PA2 key (Alt-2) to continue. 3270 terminals are screen oriented (think web browsers in the 1960s) and don't scroll - you need to ask them for the next page. This has the advantage of allowing you to edit information on your screen and only causing the computer (the mainframe, in our case) to pay attention when you send it the information you edited. Most other computers that use terminals have to deal with each keystroke separately.
 
-With this change done, the welcome message will not be displayed when you log in.  If you want to see it again, you'll need to type `TYPE PROFILE EXEC U`. Try it.
+With this change done, the welcome message will not be displayed when you log in. If you want to see it again, you'll need to type `TYPE WELCOME MESSAGE U`. Try it.
 
 ## Running a BASIC program
 
 What is a vintage computer without a BASIC interpreter, right?
 
-Let's start with the lamest, most basic BASIC program: a Hello World.
+Let's start with the most basic BASIC program: a Hello World.
 
 On your terminal, type:
 
@@ -134,7 +136,7 @@ You'll see your command ("basic hello") show up at the top of the screen (after 
 
 ## A bit of FORTRAN
 
-VM/370 CE comes with a couple hello world programs. You can use the `DIR` command to list what files are in the disk you are seeing. We typed our own in BASIC, but there is one in C and one in FORTRAN. Let's see the FORTRAN one:
+VM/370 CE comes with a couple hello world programs. You can use the `DIR` command (which is also something added to vanilla VM) to list what files are in the disk you are seeing. We typed our own in BASIC, but there is one in C and one in FORTRAN. Let's see the FORTRAN one:
 
 ```text
 TYPE HELLO FORTRAN
@@ -150,7 +152,7 @@ To compile it, run:
 FORTRAN HELLO
 ```
 
-The computer will output: 
+The computer will output:
 
 ```text
 FORTRAN IV (G) COMPILATION COMPLETE.
@@ -175,15 +177,15 @@ The first one is a nicely formatted listing, and, in ancient times, you'd find i
     0003              STOP                                                              HEL00030
     0004              END                                                               HEL00040
    FORTRAN IV G LEVEL  21                 MAIN              DATE = 26009  TIME = 23.39.33             PAGE 0002
- 
+
                                 SUBPROGRAMS CALLED
   SYMBOL    LOCATION      SYMBOL    LOCATION      SYMBOL    LOCATION      SYMBOL    LOCATION      SYMBOL    LOCATION
   IBCOM#        90
- 
+
                                 FORMAT STATEMENT MAP
   SYMBOL    LOCATION      SYMBOL    LOCATION      SYMBOL    LOCATION      SYMBOL    LOCATION      SYMBOL    LOCATION
        1        94
- 
+
      *OPTIONS IN EFFECT*  ID,EBCDIC,SOURCE,NOLIST,NODECK,LOAD,MAP
      *OPTIONS IN EFFECT*  NAME = MAIN    , LINECNT =       60
      *STATISTICS*    SOURCE STATEMENTS =        4,PROGRAM SIZE =      298
@@ -236,11 +238,11 @@ What was the magic we used to redirect? Let's see what FILEDEF does. Do a `HELP 
 
 ```text
 FILEDEF                                                   CMS Transient command
-                                                                               
+
 Use the FILEDEF command to establish data definitions for OS ddnames, to define
-files to be copied with the MOVEFILE command, or to override default file      
-definitions made by the assembler and the OS language processors.  The format  
-of the FILEDEF command is:                                                     
+files to be copied with the MOVEFILE command, or to override default file
+definitions made by the assembler and the OS language processors.  The format
+of the FILEDEF command is:
 +----------+------------------------------------------------------------------+
 | FIledef  | ddname nn *  device                                              |
 |          |                                                                  |
@@ -266,21 +268,21 @@ of the FILEDEF command is:
 |          | optionD:                                                         |
 |          |    UPCASE|LOWCASE                                                |
 +----------+------------------------------------------------------------------+
-where:                                                                         
-                                                                               
-ddname | nn | *                                                                
-         is the name  by which the file is referred to in your program.  OS    
-         ddname syntax rules should be followed.  If a number nn is specified, 
-         it is translated to a FORTRAN data definition name of FTnnF001.  An   
-         asterisk (*) may be specified with the CLEAR operand to indicate that 
-         all file definitions not entered with the PERM option should be       
-         cleared.                                                              
-                                                                               
-Devices:                                                                       
-                                                                               
-Terminal is your terminal (terminal I/O must not be blocked).  Terminal input  
-         will be truncated to the console input buffer length of 130           
-         characters.                                                           
+where:
+
+ddname | nn | *
+         is the name  by which the file is referred to in your program.  OS
+         ddname syntax rules should be followed.  If a number nn is specified,
+         it is translated to a FORTRAN data definition name of FTnnF001.  An
+         asterisk (*) may be specified with the CLEAR operand to indicate that
+         all file definitions not entered with the PERM option should be
+         cleared.
+
+Devices:
+
+Terminal is your terminal (terminal I/O must not be blocked).  Terminal input
+         will be truncated to the console input buffer length of 130
+         characters.
 ```
 
 ... and so on. Fortran, by default, outputs to whatever is defined as file "6", which ends up being "FILE FT06F001". This is all related to the way batch processes were set up where things like input and outputs were specified by a configuration for when a program is run. This was done in a language called JCL (for Job Control Language). It was uncommon for programs to be run interactively at the terminal, and even having a terminal was considered a luxury most programmers didn't have - they'd submit their code in special forms that someone else would type, convert to punch cards, and feed to the compiler.
@@ -397,7 +399,7 @@ For this example, we'll use the `GAMES.VMARC` file available at the [h390-vm gro
 
 ![File Transfer Dialog](file-transfer-dialog.png)
 
-Since we are uploading a VMARC file (think a .zip or .tar.bz2), we'll chose a binary transfer. The file will be saved to our disk D. 
+Since we are uploading a VMARC file (think a .zip or .tar.bz2), we'll chose a binary transfer. The file will be saved to our disk D.
 
 ![Transfer is happening](ongoing-transfer.png)
 
@@ -503,7 +505,7 @@ So, we see the file is in our default disk (A), which is volume MNT191. Let's ed
 
 ![Editing USER DIRECT](edit-user-direct.png)
 
-The top line tells you the file and the mode you are working in. 
+The top line tells you the file and the mode you are working in.
 
 ```text
 EDIT    USER     DIRECT   A1  F  80 ZONE=  1- 72 VERFY=  1- 72 CASE=U TRUNC= 72
@@ -526,12 +528,12 @@ The file gets more interesting when you look at the ASSIST user. Do a `LOCATE AS
 Here you see a couple commands before the disk definitions. They tell the user will log-on to the CMS operating environment (IPL means "Initial Program Load" and is what other systems would call "boot"). It'll then tell how the console is to be used (like an [IBM 3215](https://sharktastica.co.uk/keyboard-directory/gKVHfa1f) console as device 009). It'll also set up a card reader/puncher (one [IBM 2540](https://en.wikipedia.org/wiki/IBM_2540) connected on 00C and 00D) and a printer (an [IBM 1403](https://en.wikipedia.org/wiki/IBM_1403)).
 
 ```text
-USER ASSIST ASSIST 15M 16M G 
- IPL CMS                     
- CONSOLE 009 3215            
- SPOOL 00C 2540 READ A       
- SPOOL 00D 2540 PUNCH A      
- SPOOL 00E 1403 A 
+USER ASSIST ASSIST 15M 16M G
+ IPL CMS
+ CONSOLE 009 3215
+ SPOOL 00C 2540 READ A
+ SPOOL 00D 2540 PUNCH A
+ SPOOL 00E 1403 A
 ```
 
 > Note: The first line tells us the user name (`ASSISS`), the password (yes, in clear text), and how much memory the machine should have allocated.
@@ -539,21 +541,21 @@ USER ASSIST ASSIST 15M 16M G
 Let's now look into the user we might want to rename. In EDIT, do a LOCATE CMSUSER:
 
 ```text
-USER CMSUSER CMSUSER 15M 16M G                                
- IPL CMS                                                      
- CONSOLE 009 3215                                             
- SPOOL 00E 1403 A                                             
- SPOOL 00C 2540 READ *                                        
- SPOOL 00D 2540 PUNCH A                                       
- LINK MAINT 190 190 RR                                        
- LINK MAINT 19D 19D RR                                        
- LINK MAINT 19E 19E RR                                        
+USER CMSUSER CMSUSER 15M 16M G
+ IPL CMS
+ CONSOLE 009 3215
+ SPOOL 00E 1403 A
+ SPOOL 00C 2540 READ *
+ SPOOL 00D 2540 PUNCH A
+ LINK MAINT 190 190 RR
+ LINK MAINT 19D 19D RR
+ LINK MAINT 19E 19E RR
 *        cuu type adr num volser mode readpw   writepw  multpw
- MDISK   191 3350 001 115 VM50U0 MR   ALL      WRITE    MULT  
- MDISK   192 3350 116 115 VM50U0 MR   ALL      WRITE    MULT  
- MDISK   193 3350 231 115 VM50U0 MR   ALL      WRITE    MULT  
- MDISK   194 3350 346 115 VM50U0 MR   ALL      WRITE    MULT  
- MDISK   195 3350 461 094 VM50U0 MR   ALL      WRITE    MULT  
+ MDISK   191 3350 001 115 VM50U0 MR   ALL      WRITE    MULT
+ MDISK   192 3350 116 115 VM50U0 MR   ALL      WRITE    MULT
+ MDISK   193 3350 231 115 VM50U0 MR   ALL      WRITE    MULT
+ MDISK   194 3350 346 115 VM50U0 MR   ALL      WRITE    MULT
+ MDISK   195 3350 461 094 VM50U0 MR   ALL      WRITE    MULT
 ```
 
 Now you'll want to open a second x3270 window and log on as CMSUSER.
