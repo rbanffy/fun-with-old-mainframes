@@ -1,10 +1,14 @@
 ---
-title: Fun things to do with your VM/370 machine
+title: Fun things to do with your VM/370 CE machine
 ---
 
-# What can I do with a VM/370 mainframe?
+# What can I do with a VM/370 CE mainframe?
 
 This page assumes you have a machine (emulated or not) running the VM370 Community Edition OS available. There are a couple ways to get one, and you might want to choose the one that appeals to you the most (or the one that's less work - it's up to you).
+
+## What is the Community Edition?
+
+The Community Edition is a huge set of improvements and fixes applied on top of the last VM/370 that was released by IBM without a license restricting its use. These improvements and fixes have been developed and published in a variety of ways since the release of the original OS. If we were to compare it with Linux, VM/370 R6 (the release CE is based on) would be Linux 1.0 as published by Linus from his bedroom and VM/370 CE would be latest Fedora (insert your favorite maximalist distro here). It has many features that didn't exist in R6 and a couple things that would have been called science fiction back then. It's quite capable, even if the machines it can run on are limited to a single CPU and 16M of memory (IBM calls it "storage").
 
 ## Running with Docker
 
@@ -21,6 +25,8 @@ The container image we are using is based on the excellent work of the VM/370 Co
 ## Other options for getting a mainframe
 
 If you work in an organization that's cool enough to have an actual IBM mainframe, you can check if your operations team will allow you to have a small VM running nested VM/370 Community Edition. IBM mainframes have legendary backwards compatibility and there should be no (technical) issue bringing up an environment for you. There might be a lot of process hurdles, however, so tread carefully and have a good excuse at hand. "Doing fun stuff" is not it.
+
+Another possible source of used mainframes is eBay or your local IT asset disposal company, but, seriously, you probably don't want the hassle of a dedicated power line for the machine, or the basement space to have one. And, if you get a real machine, you might also get a valid license to run something more modern, like z/VM, z/OS, and a fairly modern Linux. They are also quite expensive and require expertise to set them up, and, many times, to fix them (people who decommission these machines often don't bother disconnecting cables when just cutting is faster).
 
 ## 3270 terminals
 
@@ -465,7 +471,7 @@ We are done with CMSUSER for now, so we'll be good users and log off our machine
 
 It's no fun to log in as CMSUSER every time you want to do something. You'll want a user for yourself, with reasonable permissions to do things to the machine. In my case, I want to create an "RBANFFY" user for me.
 
-Here's the first shock for those who come from other platforms - you wouldn't create a user, you'd create a VM, and you log in to that VM.
+Here's the first surprise for those who come from other platforms - you wouldn't create a user, you'd create a VM, and you log in to that VM. You can create a user without creating a VM for it, but that would not be what you actually want. Users and VMs are defined the same way, with the USER keyword.
 
 ![One does not simply add a user to TSO](one-does-not-simply-add-a-user.jpg)
 
