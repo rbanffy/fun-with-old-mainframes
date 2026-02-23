@@ -619,6 +619,18 @@ My plan of having a user for me, one for my wife, and users for my kids will hav
 
 [TBA]
 
+## Viewing files without using TYPE
+
+`TYPE` is a fine command (those with CP/M and MS-DOS experience will remember it), but VM/370 CE bundles a full-screen file viewer.
+
+[TBA]
+
+## Using other text editors
+
+So far we have used `EDIT`. It's an editor that comes with IBM's VM/370 R6 and is the one you might see in period videos, but we have another one that's much nicer: `EE`.
+
+[TBA]
+
 ## Talking to other mainframes
 
 ### Mounting a disk on another running Hercules instance
